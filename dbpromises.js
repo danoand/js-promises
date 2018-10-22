@@ -3,8 +3,14 @@ const myDB = './dbcallback';
 const db = level(myDB);
 
 // PROBLEM STATEMENT
-// I think I need to code up a method that generates a promise (executing an asynchrounous execution of code)
-// How can I return the result of that execution from my method (function)? Is that even possible?  Am I asking the right question?
+// I need to develop a method with a "signature" that:
+//    1. accepts a 'key' value identifying a key/value pair in a local leveldb instance
+//    2. returns the value associated with that key
+//
+// Issue: 
+//    * accessing the leveldb is an asynchronous operation using a Javascript promise
+//    * if I need to conform to the method signature above, how can I 'return' the key/value pair result as a return value?
+//    * Am I even approaching this issue in the right way
 
 // Define a Javascript class
 class HumbleObject {
@@ -20,7 +26,7 @@ class HumbleObject {
             .catch(function (err) { console.log("An error has occurred. See:", err) })
     }
 
-    // getElement is a HubleObject method that fetches a chunk of data given a passed key 'k'
+    // getElement is a HumbleObject method that fetches a chunk of data associated with a passed key 'k'
     getElement(k) {
         db.get(k)
             .then(function (v) { console.log("Got value: |", v, "| how can I return the value?") })
